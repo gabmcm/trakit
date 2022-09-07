@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Entries</h1>
+    <table>
+        <tr>
+            <td class='entryItem' data-id='date'>Date</td>
+            <td class='entryItem' data-id='painScale'>Pain Scale</td>
+            <td class='entryItem' data-id='medTaken'>Medications Taken</td>
+            <td class='entryItem' data-id='length'>Length</td>
+            <td class='entryItem' data-id='triggers'>Triggers</td>
+            <td class='entryItem' data-id='notes'>Notes</td>
+        </tr>
+        <% entries.forEach( el => { %>
+            <tr>
+                <td class='entryItem' data-id='date'><%=el.date%></td>
+                <td class='entryItem' data-id='painScale'><%=el.painScale%></td>
+                <td class='entryItem' data-id='medTaken'><%=el.medsTaken%></td>
+                <td class='entryItem' data-id='length'><%=el.length%></td>
+                <td class='entryItem' data-id='triggers'><%=el.triggers%></td>
+                <td class='entryItem' data-id='notes'><%=el.notes%></td>
+            </tr>
+        <% }) %>
+    </table>
+    <br />
+    <form action="/entries/createEntry" method='POST'>
+        <input type="text" placeholder="date" name="date">
+        <input type="number" placeholder="pain scale (0-10)" name="painScale">
+        <input type="text" placeholder="medications taken" name="medsTaken">
+        <input type="number" placeholder="length in hrs" name="length">
+        <input type="text" placeholder="triggers" name="triggers">
+        <input type="text" placeholder="notes" name="notes">
+
+        <input type="submit">
+    </form>
+
+    <a href="/logout">Logout</a>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

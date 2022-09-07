@@ -28,7 +28,7 @@ app.use(
     session({
         secret: 'keyboard cat',
         resave: false,
-        saveUnitialized: false,
+        saveUninitialized: false,
         store: new MongoStore({ mongooseConnection: mongoose.connection }),
     })
 )
