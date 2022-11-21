@@ -20,12 +20,22 @@ module.exports = {
         }
     },
     deleteEntry: async(req, res)=>{
-        console.log(req.body.entryIdFromJSFile)
         try{
             await Entry.findOneAndDelete({ _id: req.body.entryIdFromJSFile })
             console.log('Deleted Entry')
             res.json('Deleted It')
         }catch(err){
+            console.log(err)
+        }
+    },
+    editEntry: async(req, res)=>{
+        try{
+            await Entry.findOneAndUpdate({ _id:req.body.entryFromJSFile },{
+                date: req.body.date, painScale: req.body.painScale, medsTaken: req.body.medsTaken, length: req.body.length, triggers: req.body.triggers, notes: req.body.notes, userId: req.user.id
+            })
+            console.log('Updated entry')
+            res.json('Updated entry')
+        } catch(err){
             console.log(err)
         }
     }

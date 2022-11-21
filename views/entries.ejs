@@ -1,34 +1,39 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
+<%- include('partials/header') -%>
+
+<main class="entries">
     <h1>Entries</h1>
-    <table>
-        <tr>
-            <td class='entryItem' data-id='date'>Date</td>
-            <td class='entryItem' data-id='painScale'>Pain Scale</td>
-            <td class='entryItem' data-id='medTaken'>Medications Taken</td>
-            <td class='entryItem' data-id='length'>Length</td>
-            <td class='entryItem' data-id='triggers'>Triggers</td>
-            <td class='entryItem' data-id='notes'>Notes</td>
-        </tr>
-        <% entries.forEach( el => { %>
-            <tr>
-                <td class='entryItem' data-id='date'><%=el.date%></td>
-                <td class='entryItem' data-id='painScale'><%=el.painScale%></td>
-                <td class='entryItem' data-id='medTaken'><%=el.medsTaken%></td>
-                <td class='entryItem' data-id='length'><%=el.length%></td>
-                <td class='entryItem' data-id='triggers'><%=el.triggers%></td>
-                <td class='entryItem' data-id='notes'><%=el.notes%></td>
-            </tr>
-        <% }) %>
-    </table>
+    <div class="overflow-x-auto">
+        <table class="table w-full">
+            <thead>
+                <tr>
+                    <td class='entryItem'>Date</td>
+                    <td class='entryItem'>Pain Scale</td>
+                    <td class='entryItem'>Medications Taken</td>
+                    <td class='entryItem'>Length</td>
+                    <td class='entryItem'>Triggers</td>
+                    <td class='entryItem'>Notes</td>
+                    <td class='entryItem'></td>
+                    <td class='entryItem'></td>
+                </tr>
+            </thead>
+            <tbody>
+                <% entries.forEach( el => { %>
+                    <tr id='<%=el.id%>' class="hover">
+                        <td class='entryItem'><%=el.date%></td>
+                        <td class='entryItem'><%=el.painScale%></td>
+                        <td class='entryItem'><%=el.medsTaken%></td>
+                        <td class='entryItem'><%=el.length%></td>
+                        <td class='entryItem'><%=el.triggers%></td>
+                        <td class='entryItem'><%=el.notes%></td>
+                        <td class="del">Delete</td>
+                        <td class='edit'> Edit </td>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    </div>
     <br />
+    <a id='formToggle'>Add New</a>
     <form action="/entries/createEntry" method='POST'>
         <input type="text" placeholder="date" name="date">
         <input type="number" placeholder="pain scale (0-10)" name="painScale">
@@ -39,9 +44,6 @@
 
         <input type="submit">
     </form>
+</main>
 
-    <a href="/logout">Logout</a>
-
-    <script src="js/main.js"></script>
-</body>
-</html>
+<%- include('partials/footer') -%>
