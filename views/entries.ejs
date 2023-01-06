@@ -19,14 +19,15 @@
             <tbody>
                 <% entries.forEach( el => { %>
                     <tr id='<%=el.id%>' class="hover">
-                        <td class='entryItem'><%=el.date%></td>
-                        <td class='entryItem'><%=el.painScale%></td>
-                        <td class='entryItem'><%=el.medsTaken%></td>
-                        <td class='entryItem'><%=el.length%></td>
-                        <td class='entryItem'><%=el.triggers%></td>
-                        <td class='entryItem'><%=el.notes%></td>
+                        <td class='entryItem date'><%=el.date%></td>
+                        <td class='entryItem painScale'><%=el.painScale%></td>
+                        <td class='entryItem medsTaken'><%=el.medsTaken%></td>
+                        <td class='entryItem length'><%=el.length%></td>
+                        <td class='entryItem triggers'><%=el.triggers%></td>
+                        <td class='entryItem notes'><%=el.notes%></td>
                         <td class="del">Delete</td>
-                        <td class='edit'> Edit </td>
+                        <td class="edit">Edit</td>
+
                     </tr>
                 <% }) %>
             </tbody>
@@ -34,8 +35,8 @@
     </div>
     <br />
     <a id='formToggle'>Add New</a>
-    <form action="/entries/createEntry" method='POST'>
-        <input type="text" placeholder="date" name="date">
+    <form id="newForm" class="hide" action="/entries/createEntry" method='POST' name="newEntry">
+        <input type="date" placeholder="date" name="date" >
         <input type="number" placeholder="pain scale (0-10)" name="painScale">
         <input type="text" placeholder="medications taken" name="medsTaken">
         <input type="number" placeholder="length in hrs" name="length">
@@ -44,6 +45,20 @@
 
         <input type="submit">
     </form>
+
+    <form id="editForm" class="hide" action="/entries/editEntry" method='PUT' name="updatedEntry">
+        <h2>Edit Entry</h2>
+        <input type="date" placeholder="date" name="date" >
+        <input type="number" placeholder="pain scale (0-10)" name="painScale">
+        <input type="text" placeholder="medications taken" name="medsTaken">
+        <input type="number" placeholder="length in hrs" name="length">
+        <input type="text" placeholder="triggers" name="triggers">
+        <input type="text" placeholder="notes" name="notes">
+
+        <input type="submit" id="editSubmit">
+    </form>
+
+    <a href="/logout">Logout</a>
 </main>
 
 <%- include('partials/footer') -%>

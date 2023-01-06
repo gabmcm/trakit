@@ -2,10 +2,22 @@ const Entry = require('../models/Entry')
 
 module.exports = {
     getEntries: async(req,res) =>{
-        console.log(req.use)
+        console.log('getEntries')
+        // console.log(req.user.id)
         try{
-            const entryItems = await Entry.find({userID:req.user.id})
-            res.render('entries.ejs', { entries: entryItems, user: req.user })
+            const entryItems = await Entry.find({ userId: req.user.id })
+            console.log(entryItems)
+            console.log(req.user.id)
+            res.render('entries.ejs', { entries: entryItems, user: req.user.id })
+        }catch(err){
+            console.log(err)
+        }
+    },
+    getSingle: async(req,res) => {
+        try{
+            const foundEntry = await Entry.find({ _id: req.params.id })
+            console.log('found')
+            res.json(foundEntry)
         }catch(err){
             console.log(err)
         }
@@ -30,7 +42,7 @@ module.exports = {
     },
     editEntry: async(req, res)=>{
         try{
-            await Entry.findOneAndUpdate({ _id:req.body.entryFromJSFile },{
+            await Entry.findOneAndUpdate({ _id: req.body.entryIdFromJSFile },{
                 date: req.body.date, painScale: req.body.painScale, medsTaken: req.body.medsTaken, length: req.body.length, triggers: req.body.triggers, notes: req.body.notes, userId: req.user.id
             })
             console.log('Updated entry')

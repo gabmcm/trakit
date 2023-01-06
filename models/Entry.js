@@ -24,6 +24,10 @@ const EntrySchema = new mongoose.Schema({
     notes: {
         type: String,
         required: false,
+    },
+    userId: {
+        type: String,
+        required: true
     }
 })
 
