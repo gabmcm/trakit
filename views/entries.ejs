@@ -1,40 +1,14 @@
 <%- include('partials/header') -%>
 
-<main class="entries">
-    <h1>Entries</h1>
-    <div class="overflow-x-auto">
-        <table class="table w-full">
-            <thead>
-                <tr>
-                    <td class='entryItem'>Date</td>
-                    <td class='entryItem'>Pain Scale</td>
-                    <td class='entryItem'>Medications Taken</td>
-                    <td class='entryItem'>Length</td>
-                    <td class='entryItem'>Triggers</td>
-                    <td class='entryItem'>Notes</td>
-                    <td class='entryItem'></td>
-                    <td class='entryItem'></td>
-                </tr>
-            </thead>
-            <tbody>
-                <% entries.forEach( el => { %>
-                    <tr id='<%=el.id%>' class="hover">
-                        <td class='entryItem date'><%=el.date%></td>
-                        <td class='entryItem painScale'><%=el.painScale%></td>
-                        <td class='entryItem medsTaken'><%=el.medsTaken%></td>
-                        <td class='entryItem length'><%=el.length%></td>
-                        <td class='entryItem triggers'><%=el.triggers%></td>
-                        <td class='entryItem notes'><%=el.notes%></td>
-                        <td class="del">Delete</td>
-                        <td class="edit">Edit</td>
 
-                    </tr>
-                <% }) %>
-            </tbody>
-        </table>
+
+<main class="entries overflow-y-scroll m-1.5">
+
+    <div class="absolute top-0 right-0 m-1.5">
+        <a href="/logout"><button class="btn btn-primary">Logout</button></a>
     </div>
-    <br />
-    <a id='formToggle'>Add New</a>
+
+    <button type="button" class="btn btn-accent"><a id='formToggle'>Add New</a></button>
     <form id="newForm" class="hide" action="/entries/createEntry" method='POST' name="newEntry">
         <input type="date" placeholder="date" name="date" >
         <input type="number" placeholder="pain scale (0-10)" name="painScale">
@@ -58,7 +32,26 @@
         <input type="submit" id="editSubmit">
     </form>
 
-    <a href="/logout">Logout</a>
+    <div class="gap-5 grid justify-items-center">
+        <% 
+        entries.forEach( el => { %>
+            <div class="card bg-base-100 shadow-xl w-6/12">
+                <div class="card-body">
+                    <h2><%=el.date%></h2>
+                    <p>Pain Scale: <%=el.painScale%></p>
+                    <p>Medications Taken: <%=el.medsTaken%></p>
+                    <p>Length: <%=el.length%></p>
+                    <p>Triggers: <%=el.triggers%></p>
+                    <p>Notes: <%=el.notes%></p>
+                    <div class="card-actions justify-end">
+                        <button type="button" class="delete btn btn-warning">Delete</button>
+                        <button type="button" class="edit btn btn-secondary">Edit</button>
+                    </div>
+                </div>
+            </div>
+        
+        <% }) %>
+    </div>    
 </main>
 
 <%- include('partials/footer') -%>
