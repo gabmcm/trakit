@@ -6,8 +6,7 @@ module.exports = {
         // console.log(req.user.id)
         try{
             const entryItems = await Entry.find({ userId: req.user.id })
-            entryItems.sort((a, b) => Date.parse(a.date) - Date.parse(b.date))
-            console.log(entryItems)
+            entryItems.sort((a, b) => Date.parse(b.date) - Date.parse(a.date))
             console.log(req.user.id)
             res.render('entries.ejs', { entries: entryItems, user: req.user.id })
         }catch(err){
