@@ -26,8 +26,6 @@ async function editEntry(){
     }
 
     const entryId = this.parentNode.parentNode.id
-
-
     console.log(`entryID: ${entryId}`)
 
     try { 
